@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hello
-          image: nginxdemos/hello
+          image: registry.fis-cp4d-dev.fis.com.vn:8443/wso2/wso2is:7.1.0.12
           ports:
             - containerPort: 80
 ---
