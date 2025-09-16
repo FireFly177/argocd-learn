@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
+  name: wso2is
   namespace: argo-test
 spec:
   replicas: 1
@@ -14,15 +14,14 @@ spec:
         app: hello
     spec:
       containers:
-        - name: hello
-          image: registry.fis-cp4d-dev.fis.com.vn:8443/wso2/wso2is:7.1.0.12
+        - image: registry.fis-cp4d-dev.fis.com.vn:8443/wso2/wso2is:7.1.0.12
           ports:
             - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello
+  name: wso2is-service
   namespace: argo-test
 spec:
   selector:
@@ -34,7 +33,7 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: hello
+  name: wso2-route
   namespace: argo-test
 spec:
   to:
