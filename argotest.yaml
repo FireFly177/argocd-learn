@@ -14,7 +14,8 @@ spec:
         app: hello
     spec:
       containers:
-        - image: registry.fis-cp4d-dev.fis.com.vn:8443/wso2/wso2is:7.1.0.12
+        - name: wso2-is
+          image: registry.fis-cp4d-dev.fis.com.vn:8443/wso2/wso2is:7.1.0.12
           ports:
             - containerPort: 80
 ---
