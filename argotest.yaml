@@ -7,17 +7,18 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello
+      app: wso2is
   template:
     metadata:
       labels:
-        app: hello
+        app: wso2is
     spec:
       containers:
-        - name: wso2-is
+        - name: wso2is
           image: registry.fis-cp4d-dev.fis.com.vn:8443/wso2/wso2is:7.1.0.12
           ports:
-            - containerPort: 80
+            - containerPort: 9443
+            - containerPort: 9763
 ---
 apiVersion: v1
 kind: Service
@@ -26,19 +27,22 @@ metadata:
   namespace: argo-test
 spec:
   selector:
-    app: hello
+    app: wso2is
   ports:
-    - port: 80
-      targetPort: 80
+    - name: https
+      port: 9443
+      targetPort: 9443
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: wso2-route
+  name: wso2is
   namespace: argo-test
 spec:
   to:
     kind: Service
-    name: hello
+    name: wso2is-service
   port:
-    targetPort: 80
+    targetPort: https
+  tls:
+    termination: passthrough
